@@ -20,3 +20,7 @@
 - [ ] Email logs viewer with dynamic filtering and resend
 - [ ] Analytics dashboard with live charts and KPIs
 - [ ] Admin tests and validation
+
+# Bug Fixes
+
+- [x] Fix newsletter subscription email notifications - emails not being sent when users subscribe

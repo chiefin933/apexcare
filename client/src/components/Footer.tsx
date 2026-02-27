@@ -7,6 +7,64 @@ import { Link } from "wouter";
 import { Phone, Mail, MapPin, Clock, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
+
+function NewsletterSubscription() {
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const subscribeMutation = trpc.newsletter.subscribe.useMutation();
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) {
+      toast.error("Please enter your email address");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const result = await subscribeMutation.mutateAsync({ email: email.trim() });
+      toast.success(result.message);
+      setEmail("");
+    } catch (error: any) {
+      const errorMessage = error?.message || "Failed to subscribe to newsletter";
+      toast.error(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <h4 className="font-serif font-semibold text-white mb-5">Health Newsletter</h4>
+      <p className="text-sm text-gray-400 mb-4">
+        Get expert health tips, medical insights, and ApexCare news delivered to your inbox.
+      </p>
+      <form onSubmit={handleSubscribe} className="space-y-2">
+        <Input
+          type="email"
+          placeholder="Your email address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          disabled={isLoading}
+          className="bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:border-teal-500"
+        />
+        <Button
+          type="submit"
+          disabled={isLoading}
+          className="w-full bg-teal-600 hover:bg-teal-700 text-white disabled:opacity-50"
+        >
+          {isLoading ? "Subscribing..." : "Subscribe"}
+        </Button>
+      </form>
+      <p className="text-xs text-gray-500 mt-3">
+        We respect your privacy. Unsubscribe at any time.
+      </p>
+    </div>
+  );
+}
 
 export default function Footer() {
   return (
@@ -104,25 +162,7 @@ export default function Footer() {
           </div>
 
           {/* Newsletter */}
-          <div>
-            <h4 className="font-serif font-semibold text-white mb-5">Health Newsletter</h4>
-            <p className="text-sm text-gray-400 mb-4">
-              Get expert health tips, medical insights, and ApexCare news delivered to your inbox.
-            </p>
-            <div className="space-y-2">
-              <Input
-                type="email"
-                placeholder="Your email address"
-                className="bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:border-teal-500"
-              />
-              <Button className="w-full bg-teal-600 hover:bg-teal-700 text-white">
-                Subscribe
-              </Button>
-            </div>
-            <p className="text-xs text-gray-500 mt-3">
-              We respect your privacy. Unsubscribe at any time.
-            </p>
-          </div>
+          <NewsletterSubscription />
         </div>
       </div>
 

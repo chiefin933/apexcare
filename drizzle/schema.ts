@@ -119,3 +119,19 @@ export const emailLogs = mysqlTable("emailLogs", {
 
 export type EmailLog = typeof emailLogs.$inferSelect;
 export type InsertEmailLog = typeof emailLogs.$inferInsert;
+
+/**
+ * Newsletter Subscribers table - tracks email subscribers for health tips
+ */
+export const newsletterSubscribers = mysqlTable("newsletterSubscribers", {
+  id: int("id").autoincrement().primaryKey(),
+  email: varchar("email", { length: 320 }).notNull().unique(),
+  subscriptionStatus: mysqlEnum("subscriptionStatus", ["active", "unsubscribed", "bounced"]).default("active").notNull(),
+  subscribedAt: timestamp("subscribedAt").defaultNow().notNull(),
+  unsubscribedAt: timestamp("unsubscribedAt"),
+  lastEmailSentAt: timestamp("lastEmailSentAt"),
+  emailCount: int("emailCount").default(0).notNull(),
+});
+
+export type NewsletterSubscriber = typeof newsletterSubscribers.$inferSelect;
+export type InsertNewsletterSubscriber = typeof newsletterSubscribers.$inferInsert;
