@@ -371,13 +371,13 @@ export default function Home() {
                           </span>
                         ))}
                       </div>
-                      <Link href="/book-appointment">
-                        <Button size="sm" className="w-full bg-teal-600 hover:bg-teal-700 text-white">
-                          Book Appointment
-                        </Button>
-                      </Link>
                     </div>
                   </div>
+                </Link>
+                <Link href="/book-appointment">
+                  <Button size="sm" className="w-full bg-teal-600 hover:bg-teal-700 text-white mt-3">
+                    Book Appointment
+                  </Button>
                 </Link>
               </motion.div>
             ))}
