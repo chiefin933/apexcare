@@ -18,7 +18,7 @@ import Departments from "./pages/Departments";
 import DepartmentDetail from "./pages/DepartmentDetail";
 import Doctors from "./pages/Doctors";
 import DoctorDetail from "./pages/DoctorDetail";
-import BookAppointment from "./pages/BookAppointment";
+import BookAppointmentWithPayment from "./pages/BookAppointmentWithPayment";
 import PatientPortal from "./pages/PatientPortal";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
@@ -35,7 +35,7 @@ function Router() {
       <Route path="/departments/:id" component={DepartmentDetail} />
       <Route path="/doctors" component={Doctors} />
       <Route path="/doctors/:id" component={DoctorDetail} />
-      <Route path="/book-appointment" component={BookAppointment} />
+      <Route path="/book-appointment" component={BookAppointmentWithPayment} />
       <Route path="/patient-portal" component={PatientPortal} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:id" component={BlogDetail} />
