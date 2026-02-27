@@ -12,6 +12,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 
 // Pages
 import Home from "./pages/Home";
+import AdminDashboard from "./pages/AdminDashboard";
 import About from "./pages/About";
 import Departments from "./pages/Departments";
 import DepartmentDetail from "./pages/DepartmentDetail";
@@ -22,11 +23,13 @@ import PatientPortal from "./pages/PatientPortal";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import Contact from "./pages/Contact";
+
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      <Route path="/" component={Home} />
+      <Route path={"/"} component={Home} />
+      <Route path={"/admin"} component={AdminDashboard} />
       <Route path="/about" component={About} />
       <Route path="/departments" component={Departments} />
       <Route path="/departments/:id" component={DepartmentDetail} />
