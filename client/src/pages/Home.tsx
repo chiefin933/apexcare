@@ -6,6 +6,7 @@
 
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { useAuth } from "@/_core/hooks/useAuth";
 import {
   Heart, Brain, Baby, Bone, Scan, Siren,
   Users, Award, Building2, Stethoscope,
@@ -30,6 +31,10 @@ const fadeUp = {
 };
 
 export default function Home() {
+  // The userAuth hooks provides authentication state
+  // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
+  let { user, loading, error, isAuthenticated, logout } = useAuth();
+
   return (
     <Layout>
       {/* ── Hero Section ── */}
